@@ -9,13 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack {
-            Color.red
-            Text("Hello, world!")
-                .padding()
-                .background(Color.green)
-                .frame(width: 300, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-        }
+        Text("Hello, world!")
+        
         
     }
 }
