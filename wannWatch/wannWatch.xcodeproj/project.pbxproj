@@ -11,6 +11,8 @@
 		3F6450F826415DE300DD637E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6450F726415DE300DD637E /* ContentView.swift */; };
 		3F6450FA26415DE400DD637E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F6450F926415DE400DD637E /* Assets.xcassets */; };
 		3F6450FD26415DE400DD637E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F6450FC26415DE400DD637E /* Preview Assets.xcassets */; };
+		3F645109264172E700DD637E /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F645108264172E700DD637E /* MovieModel.swift */; };
+		3F64510D264174CC00DD637E /* MovieDTOModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F64510C264174CC00DD637E /* MovieDTOModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		3F6450F926415DE400DD637E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3F6450FC26415DE400DD637E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3F6450FE26415DE400DD637E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F645108264172E700DD637E /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieModel.swift; path = ../../../../MovieModel.swift; sourceTree = "<group>"; };
+		3F64510C264174CC00DD637E /* MovieDTOModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTOModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,7 @@
 		3F6450F426415DE300DD637E /* wannWatch */ = {
 			isa = PBXGroup;
 			children = (
+				3F6451062641696300DD637E /* Data */,
 				3F6450F526415DE300DD637E /* wannWatchApp.swift */,
 				3F6450F726415DE300DD637E /* ContentView.swift */,
 				3F6450F926415DE400DD637E /* Assets.xcassets */,
@@ -67,6 +72,23 @@
 				3F6450FC26415DE400DD637E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3F6451062641696300DD637E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				3F6451072641697000DD637E /* Models */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		3F6451072641697000DD637E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3F645108264172E700DD637E /* MovieModel.swift */,
+				3F64510C264174CC00DD637E /* MovieDTOModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,6 +160,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F64510D264174CC00DD637E /* MovieDTOModel.swift in Sources */,
+				3F645109264172E700DD637E /* MovieModel.swift in Sources */,
 				3F6450F826415DE300DD637E /* ContentView.swift in Sources */,
 				3F6450F626415DE300DD637E /* wannWatchApp.swift in Sources */,
 			);
