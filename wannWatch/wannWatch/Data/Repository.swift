@@ -8,8 +8,13 @@
 import Foundation
 import Combine
 
+
+
+
+
 extension Notification.Name {
-    static let searchQueryMsg = Notification.Name("searchQueryMsg")
+    static let searchMovieQueryMsg = Notification.Name("searchMovieQueryMsg")
+    static let searchTvShowQueryMsg = Notification.Name("searchTvShowQueryMsg")
 }
 
 
@@ -17,32 +22,47 @@ extension Notification.Name {
 class Repository {
     
     
-    @Published var movies = [Movie]()
+    @Published var watchables = [Watchable]()
     let dataLoader = DataLoader()
+    private let queryParamter = ["include_adult" : "true" ]
     private var cancellables: Set<AnyCancellable> = []
     init() {
-        // empfänger
-        NotificationCenter.Publisher(center: .default, name: .searchQueryMsg)
+        // empfänger, sender in earch list view
+        NotificationCenter.Publisher(center: .default, name: .searchMovieQueryMsg)
             .sink { notification in
-                //                print("With Object notification: \(notification)")
                 let object = notification.object // object ist vom Type Any ! da kann alles rein ...
-                //                print("object: \(object)")
-                // das gesendete object MUSS gecasted werden, um es zu verwenden!
                 guard let searchQuery = object as? String else { return }
                 self.searchForMoviesBy( searchQuery )
-                //                print("user: \(user.name)")
+            }.store(in: &cancellables)
+        NotificationCenter.Publisher(center: .default, name: .searchTvShowQueryMsg)
+            .sink { notification in
+                let object = notification.object // object ist vom Type Any ! da kann alles rein ...
+                guard let searchQuery = object as? String else { return }
+                self.searchForTvShowsBy( searchQuery )
             }.store(in: &cancellables)
     }
     
+    
+    private func searchForTvShowsBy( _ query: String) {
+        if query.isEmpty {
+            watchables.removeAll()
+        }
+        dataLoader.searchTvShow(query: query, searchParams: queryParamter)
+        { [weak self] tvShows in
+            self?.watchables = tvShows
+            // print("MOVIES: \(tvShows)")
+        }
+    }
+    
+    
     private func searchForMoviesBy( _ query: String) {
         if query.isEmpty {
-            movies.removeAll()
+            watchables.removeAll()
         }
-        dataLoader.searchMovie(query: query)
+        dataLoader.searchMovie(query: query, searchParams: queryParamter)
         { [weak self] movies in
-            self?.movies = movies
+            self?.watchables = movies
             // print("MOVIES: \(movies)")
         }
-        
     }
 }

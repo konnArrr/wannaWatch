@@ -7,10 +7,21 @@
 
 import SwiftUI
 
+
+enum SearchCategory: String, Equatable, CaseIterable {
+    case movieSearch = "Search Movies"
+    case tvShowSearch = "Search Tv Shows"
+    
+    // var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
+}
+
+
 struct SearchListView: View {
     @StateObject private var viewModel = SearchListViewModel()
     @State private var searchString: String = ""
     @State private var showCancelButton: Bool = false
+    @State private var searchCategory: SearchCategory = .movieSearch
+
     var body: some View {
         NavigationView {
             VStack {
@@ -48,20 +59,17 @@ struct SearchListView: View {
                 .onChange(of: searchString) {newValue in
                     postSearchMsgToRepo()
                 }
-                //                HStack {
-                //                    VStack {
-                //                        TextField("search...", text: $searchString)
-                //                            .disableAutocorrection(true)
-                //                        Divider()
-                //                    }
-                //                    .padding(.horizontal, 20)
-                //                    Button {
-                //                        postSearchMsgToRepo()
-                //                    } label: {
-                //                        Image(systemName: "magnifyingglass.circle")
-                //                            .font(Font.system(.largeTitle).bold())
-                //                    }
-                //                }
+                Picker("filterSetting", selection: $searchCategory) {
+                    ForEach(SearchCategory.allCases, id: \.self) {
+                        Text($0.rawValue).tag($0)
+                        
+                    }
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .onChange(of: searchCategory) { newValue in
+                    print(searchCategory.rawValue)
+                    searchString = ""
+                }
                 
                 if !viewModel.searchedMoviesVm.isEmpty {
                     List {
@@ -99,7 +107,15 @@ struct SearchListView: View {
         }
     }
     private func postSearchMsgToRepo() {
-        NotificationCenter.default.post(name: .searchQueryMsg, object: searchString)
+        // sender für api call in repository
+        switch searchCategory {
+        case .movieSearch:
+            NotificationCenter.default.post(name: .searchMovieQueryMsg, object: searchString)
+            print("msg movie")
+        case .tvShowSearch:
+            NotificationCenter.default.post(name: .searchTvShowQueryMsg, object: searchString)
+            print("msg tv shows")
+        }
     }
 }
 

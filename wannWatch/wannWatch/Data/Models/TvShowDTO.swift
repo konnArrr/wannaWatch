@@ -1,32 +1,33 @@
 //
-//  UserDTOModel.swift
+//  TvShowDTO.swift
 //  wannWatch
 //
-//  Created by Student on 04.05.21.
+//  Created by Student on 07.05.21.
 //
 
 import Foundation
+
 import SwiftUI
 import Combine
 
-struct InitialMovieDTO: Codable {
-    let results: [MovieDTO]
+struct InitialTvShowDTO: Codable {
+    let results: [TvShowDTO]
 }
 
 
-struct MovieDTO : Codable {
+struct TvShowDTO : Codable {
     let id: Int
-    let title: String
+    let name: String
     let originalLanguage: String
     let overview: String
     let voteAverage: Double
-    let releaseDate: String
+    let firstAirDate: String
     let posterPath: String?
     
     
     func mapToWatchable() -> Watchable {
         // posterPath ?? ""
-        return Watchable(id: self.id, title: self.title, originalLanguage: self.originalLanguage, overview: self.overview,voteAverage: self.voteAverage, releaseDate: self.releaseDate ,posterPath: self.posterPath)
+        return Watchable(id: self.id, title: self.name, originalLanguage: self.originalLanguage, overview: self.overview,voteAverage: self.voteAverage, releaseDate: self.firstAirDate ,posterPath: self.posterPath)
     }
     
 //    enum CodingKeys: String, CodingKey {

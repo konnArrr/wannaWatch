@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DetailMovieView: View {
     private let viewModel = DetailViewModel()
-    let movie: Movie
+    let movie: Watchable
     let showAddButton: Bool
     @State private var addButtonDisabled = false
     

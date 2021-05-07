@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 class FavouritesViewModel: ObservableObject {
-    @Published private(set) var favouriteMoviesVm = [Movie]()
+    @Published private(set) var favouriteMoviesVm = [Watchable]()
     private var cancellbale: AnyCancellable?
     init() {
         cancellbale = StorageLoader.shared.$favouriteMovieList.sink(receiveValue: { [weak self] favouriteMovies in

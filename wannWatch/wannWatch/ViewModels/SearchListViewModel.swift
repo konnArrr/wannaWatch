@@ -9,11 +9,11 @@ import Foundation
 import Combine
 
 class SearchListViewModel: ObservableObject {
-    @Published private(set) var searchedMoviesVm = [Movie]()
+    @Published private(set) var searchedMoviesVm = [Watchable]()
     private let repository = Repository()
     private var cancellbale: AnyCancellable?
     init() {
-        cancellbale = repository.$movies.sink(receiveValue: { [weak self] searchedMovies in
+        cancellbale = repository.$watchables.sink(receiveValue: { [weak self] searchedMovies in
             self?.searchedMoviesVm = searchedMovies
         })
     }

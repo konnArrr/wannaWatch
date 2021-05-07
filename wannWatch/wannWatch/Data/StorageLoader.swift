@@ -10,7 +10,7 @@ import SwiftUI
 
 class StorageLoader {
     static let shared = StorageLoader()
-    @Published var favouriteMovieList = [Movie]()
+    @Published var favouriteMovieList = [Watchable]()
     @AppStorage("favouriteMovieList") private var dataForAppStorage: Data = Data()
     
     private init() {
@@ -27,7 +27,7 @@ class StorageLoader {
         saveFavouriteMovieList()
     }
     
-    public func saveToFavouriteMovieList(movie: Movie) {
+    public func saveToFavouriteMovieList(movie: Watchable) {
         favouriteMovieList.append(movie)
         saveFavouriteMovieList()
     }
@@ -38,7 +38,7 @@ class StorageLoader {
     }
     
     public func loadFavouriteMovieList() {
-        guard let loadedDataObject = try? JSONDecoder().decode([Movie].self, from: dataForAppStorage) else { return }
+        guard let loadedDataObject = try? JSONDecoder().decode([Watchable].self, from: dataForAppStorage) else { return }
         favouriteMovieList = loadedDataObject
     }
      

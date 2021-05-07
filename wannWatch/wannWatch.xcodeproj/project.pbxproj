@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F3965C526456BB10031D496 /* TvShowDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3965C426456BB10031D496 /* TvShowDTO.swift */; };
 		3F4C6E3F264292BF00285612 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C6E3E264292BF00285612 /* Repository.swift */; };
 		3F4C6E452642AEE900285612 /* SearchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C6E442642AEE900285612 /* SearchListViewModel.swift */; };
 		3F4C6E492642B66900285612 /* SearchListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4C6E482642B66900285612 /* SearchListView.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F3965C426456BB10031D496 /* TvShowDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TvShowDTO.swift; sourceTree = "<group>"; };
 		3F4C6E3E264292BF00285612 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		3F4C6E442642AEE900285612 /* SearchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListViewModel.swift; sourceTree = "<group>"; };
 		3F4C6E482642B66900285612 /* SearchListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			children = (
 				3F645108264172E700DD637E /* MovieModel.swift */,
 				3F64510C264174CC00DD637E /* MovieDTOModel.swift */,
+				3F3965C426456BB10031D496 /* TvShowDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				3F64511426417F7F00DD637E /* DataLoader.swift in Sources */,
 				3F645109264172E700DD637E /* MovieModel.swift in Sources */,
 				3F5E3DCD26442DDB004376B5 /* DetailViewModel.swift in Sources */,
+				3F3965C526456BB10031D496 /* TvShowDTO.swift in Sources */,
 				3F4C6E492642B66900285612 /* SearchListView.swift in Sources */,
 				3F6450F826415DE300DD637E /* ContentView.swift in Sources */,
 				3F6450F626415DE300DD637E /* wannWatchApp.swift in Sources */,
