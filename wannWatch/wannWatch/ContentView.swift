@@ -8,8 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    var searchString: String = "Doom"
     var body: some View {
-        Text("Hello, world!") 
+        TabView {
+            SearchListView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass.circle")
+                    Text("Search")
+                }
+            FavouriteMoviesView()
+                .tabItem {
+                    Image(systemName: "hand.thumbsup")
+                    Text("Favourites")                        
+                }
+        }
+    }
+    private func postSearchMsgToRepo() {
+        print("button pressed")
+        NotificationCenter.default.post(name: .searchQueryMsg, object: searchString)
     }
 }
 
