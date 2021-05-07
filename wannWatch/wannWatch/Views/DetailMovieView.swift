@@ -14,6 +14,13 @@ struct DetailMovieView: View {
     let showAddButton: Bool
     @State private var addButtonDisabled = false
     
+    var userRating: String {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 2
+        let rate = movie.voteAverage * 10
+        return formatter.string(from: NSNumber(value: rate)) ?? "$0"
+    }
+    
     var body: some View {
         ScrollView {
             VStack {
@@ -29,15 +36,24 @@ struct DetailMovieView: View {
                     .padding(.horizontal, 30)
                 Spacer()
                     .frame(height: 20)
+                Text("\(movie.releaseDate)")
+                Spacer()
+                    .frame(height: 20)
                 Text("\(movie.overview)")
                     .padding(.horizontal, 50)
+                Spacer()
+                    .frame(height: 30)
+                Text("User Rating:\n\(userRating)%")
+                    .font(Font.system(.title2))
+                Spacer()
+                    .frame(height: 50)
             }
             .multilineTextAlignment(.center)
                 .navigationTitle("Details")
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
                     HStack {
-                        if showAddButton {
+                        if !viewModel.favouritesListContains(movie) {
                             Button {
                                 viewModel.saveMovieToFavourites(movie: movie)
                                 addButtonDisabled = true
@@ -45,6 +61,8 @@ struct DetailMovieView: View {
                                 Text("add to favourites")
                             }
                             .disabled(addButtonDisabled)
+                        } else {
+                            Image(systemName: "heart.fill")
                         }
                         
                     }

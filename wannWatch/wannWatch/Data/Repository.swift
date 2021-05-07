@@ -24,25 +24,25 @@ class Repository {
         // empfänger
         NotificationCenter.Publisher(center: .default, name: .searchQueryMsg)
             .sink { notification in
-//                print("With Object notification: \(notification)")
+                //                print("With Object notification: \(notification)")
                 let object = notification.object // object ist vom Type Any ! da kann alles rein ...
-//                print("object: \(object)")
+                //                print("object: \(object)")
                 // das gesendete object MUSS gecasted werden, um es zu verwenden!
                 guard let searchQuery = object as? String else { return }
                 self.searchForMoviesBy( searchQuery )
-//                print("user: \(user.name)")
+                //                print("user: \(user.name)")
             }.store(in: &cancellables)
     }
     
     private func searchForMoviesBy( _ query: String) {
-            dataLoader.searchMovie(query: query)
-            { [weak self] movies in
-                self?.movies = movies
-                print("MOVIES: \(movies)")
-                }
+        if query.isEmpty {
+            movies.removeAll()
+        }
+        dataLoader.searchMovie(query: query)
+        { [weak self] movies in
+            self?.movies = movies
+            // print("MOVIES: \(movies)")
+        }
+        
     }
-    
-    
-    
-   
 }

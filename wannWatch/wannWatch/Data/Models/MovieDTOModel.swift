@@ -19,12 +19,14 @@ struct MovieDTO : Codable {
     let title: String
     let originalLanguage: String
     let overview: String
+    let voteAverage: Double
+    let releaseDate: String
     let posterPath: String?
     
     
     func mapToMovie() -> Movie {
         // posterPath ?? ""
-        return Movie(id: self.id, title: self.title, originalLanguage: self.originalLanguage, overview: self.overview, posterPath: self.posterPath)
+        return Movie(id: self.id, title: self.title, originalLanguage: self.originalLanguage, overview: self.overview,voteAverage: self.voteAverage, releaseDate: self.releaseDate ,posterPath: self.posterPath)
     }
     
 //    enum CodingKeys: String, CodingKey {

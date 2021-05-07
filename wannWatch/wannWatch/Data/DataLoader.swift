@@ -45,7 +45,7 @@ class DataLoader {
             do {
                 let jsonDataInitial = try self.jsonDecoder.decode(Initial.self, from: data)
                 let resultMovieDTO = jsonDataInitial.results
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async {
                     let searchedMovies = resultMovieDTO.map{ $0.mapToMovie() }
                     completion(searchedMovies)
                 }

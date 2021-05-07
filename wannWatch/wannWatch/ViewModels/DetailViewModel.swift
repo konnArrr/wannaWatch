@@ -12,4 +12,11 @@ class DetailViewModel {
     public func saveMovieToFavourites(movie: Movie) {
         StorageLoader.shared.saveToFavouriteMovieList(movie: movie)
     }
+    
+    public func favouritesListContains( _ movie: Movie) -> Bool {
+        return StorageLoader.shared.favouriteMovieList.contains { $0 == movie }
+    }
+    
+    
+    
 }

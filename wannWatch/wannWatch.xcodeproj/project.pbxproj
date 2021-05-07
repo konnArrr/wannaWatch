@@ -98,6 +98,7 @@
 		3F6450F426415DE300DD637E /* wannWatch */ = {
 			isa = PBXGroup;
 			children = (
+				3F6451102641770C00DD637E /* Utils.swift */,
 				3F4C6E472642B65300285612 /* Views */,
 				3F4C6E432642ABF900285612 /* ViewModels */,
 				3F6451062641696300DD637E /* Data */,
@@ -106,7 +107,6 @@
 				3F6450F926415DE400DD637E /* Assets.xcassets */,
 				3F6450FE26415DE400DD637E /* Info.plist */,
 				3F6450FB26415DE400DD637E /* Preview Content */,
-				3F6451102641770C00DD637E /* Utils.swift */,
 			);
 			path = wannWatch;
 			sourceTree = "<group>";

@@ -9,26 +9,60 @@ import SwiftUI
 
 struct SearchListView: View {
     @StateObject private var viewModel = SearchListViewModel()
-    @State private var searchString: String = "Doom"
-    @State private var showDetailView: Bool = false
+    @State private var searchString: String = ""
+    @State private var showCancelButton: Bool = false
     var body: some View {
         NavigationView {
             VStack {
                 HStack {
-                    VStack {
-                        TextField("search...", text: $searchString)
-                            .disableAutocorrection(true)
-                        Divider()
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                        
+                        TextField("search", text: $searchString, onEditingChanged: { isEditing in
+                            self.showCancelButton = true
+                        })
+                        .foregroundColor(.primary)
+                        .disableAutocorrection(true)
+                        Button(action: {
+                            self.searchString = ""
+                        }) {
+                            Image(systemName: "xmark.circle.fill").opacity(searchString == "" ? 0 : 1)
+                        }
                     }
-                    .padding(.horizontal, 20)
-                    Button {
-                        postSearchMsgToRepo()
-                    } label: {
-                        Image(systemName: "magnifyingglass.circle")
-                            .font(Font.system(.largeTitle).bold())
+                    .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
+                    .foregroundColor(.secondary)
+                    .background(Color(.secondarySystemBackground))
+                    .cornerRadius(10.0)
+                    
+                    if showCancelButton  {
+                        Button("Cancel") {
+                            UIApplication.shared.endEditing(true) // this must be placed before the other commands here
+                            self.searchString = ""
+                            self.showCancelButton = false
+                        }
+                        .foregroundColor(Color(.systemBlue))
                     }
                 }
-                .navigationTitle("Search")
+                .padding(.horizontal)
+                .navigationBarHidden(showCancelButton)
+                .onChange(of: searchString) {newValue in
+                    postSearchMsgToRepo()
+                }
+                //                HStack {
+                //                    VStack {
+                //                        TextField("search...", text: $searchString)
+                //                            .disableAutocorrection(true)
+                //                        Divider()
+                //                    }
+                //                    .padding(.horizontal, 20)
+                //                    Button {
+                //                        postSearchMsgToRepo()
+                //                    } label: {
+                //                        Image(systemName: "magnifyingglass.circle")
+                //                            .font(Font.system(.largeTitle).bold())
+                //                    }
+                //                }
+                
                 if !viewModel.searchedMoviesVm.isEmpty {
                     List {
                         ForEach(viewModel.searchedMoviesVm) {movie in
@@ -40,21 +74,26 @@ struct SearchListView: View {
                                         Spacer()
                                         Text(movie.title)
                                             .multilineTextAlignment(.center)
-                                         Spacer()
+                                        Spacer()
                                     }
                                 }
                                 
                                 .padding()
                                 .border(Color.black, width: 2)
+                                
                             }
                         }
                     }
+                    .navigationTitle("Search")
+                    .resignKeyboardOnDragGesture()
                 } else {
                     Spacer()
                     Text("Please enter\nnew search text")
                         .font(Font.system(.title))
                         .multilineTextAlignment(.center)
                     Spacer()
+                        .navigationTitle("Search")
+                        .resignKeyboardOnDragGesture()
                 }
             }
         }
@@ -67,5 +106,30 @@ struct SearchListView: View {
 struct SearchListView_Previews: PreviewProvider {
     static var previews: some View {
         SearchListView()
+    }
+}
+
+
+extension UIApplication {
+    func endEditing(_ force: Bool) {
+        self.windows
+            .filter{$0.isKeyWindow}
+            .first?
+            .endEditing(force)
+    }
+}
+
+struct ResignKeyboardOnDragGesture: ViewModifier {
+    var gesture = DragGesture().onChanged{_ in
+        UIApplication.shared.endEditing(true)
+    }
+    func body(content: Content) -> some View {
+        content.gesture(gesture)
+    }
+}
+
+extension View {
+    func resignKeyboardOnDragGesture() -> some View {
+        return modifier(ResignKeyboardOnDragGesture())
     }
 }
