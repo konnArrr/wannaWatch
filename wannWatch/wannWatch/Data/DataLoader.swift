@@ -41,7 +41,7 @@ class DataLoader {
             self.encodeJsonTVShow(data, completion: complition)
         }
     }
-
+    
     
     func search(url: URL, query: String, searchParams: [String : String]? = nil, completionFinal: @escaping ([Watchable]) -> Void ,  encoding: @escaping (_ data: Data, _ completion: @escaping ([Watchable]) -> Void) -> Void) {
         guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return }
@@ -54,8 +54,6 @@ class DataLoader {
         guard  let finalURL = urlComponents.url else { return  }
         print("finalURL: \(finalURL)")
         let task = urlSession.dataTask(with: finalURL) {  (data, response, error) in
-            //            [weak self]
-            //            guard let self = self else { return }
             guard error == nil else { return }
             //            print("error: \(error)")
             guard let httpResponse: HTTPURLResponse = response as? HTTPURLResponse else { return }
@@ -64,14 +62,12 @@ class DataLoader {
             guard (200..<299).contains(statusCode) else { return }
             //            print("data: \(data)")
             guard let data = data else { return }
-            encoding(data, completionFinal)
-            // self.encodeJsonMovie(data, completion: completion)
-            
+            encoding(data, completionFinal)            
         }
         task.resume()
     }
     
-
+    
     
     fileprivate func encodeJsonMovie(_ data: Data, completion: @escaping ([Watchable]) -> Void) {
         do {

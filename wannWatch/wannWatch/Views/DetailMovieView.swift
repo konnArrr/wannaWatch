@@ -18,7 +18,7 @@ struct DetailMovieView: View {
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
         let rate = movie.voteAverage * 10
-        return formatter.string(from: NSNumber(value: rate)) ?? "$0"
+        return formatter.string(from: NSNumber(value: rate)) ?? "0%"
     }
     
     var body: some View {
@@ -28,9 +28,6 @@ struct DetailMovieView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 250)
                     .padding(.vertical, 20)
-                    // .frame(height: 100)
-//                Spacer()
-//                    .frame(height: 30)
                 Text("\(movie.title)")
                     .font(Font.title.bold())
                     .padding(.horizontal, 30)
@@ -49,7 +46,7 @@ struct DetailMovieView: View {
                     .frame(height: 50)
             }
             .multilineTextAlignment(.center)
-                .navigationTitle("Details")
+            .navigationTitle("Details")
             .toolbar {
                 ToolbarItem(placement: ToolbarItemPlacement.navigationBarTrailing) {
                     HStack {
@@ -64,14 +61,11 @@ struct DetailMovieView: View {
                         } else {
                             Image(systemName: "heart.fill")
                         }
-                        
                     }
                 }
             }
         }
-        
-    }
-    
+    }    
 }
 
 //struct DetailMovieView_Previews: PreviewProvider {

@@ -8,11 +8,9 @@
 import SwiftUI
 
 
-enum SearchCategory: String, Equatable, CaseIterable {
+enum SearchCategory: String, CaseIterable {
     case movieSearch = "Search Movies"
     case tvShowSearch = "Search Tv Shows"
-    
-    // var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue) }
 }
 
 
@@ -21,14 +19,14 @@ struct SearchListView: View {
     @State private var searchString: String = ""
     @State private var showCancelButton: Bool = false
     @State private var searchCategory: SearchCategory = .movieSearch
-
+    
     var body: some View {
         NavigationView {
             VStack {
+                // search field
                 HStack {
                     HStack {
                         Image(systemName: "magnifyingglass")
-                        
                         TextField("search", text: $searchString, onEditingChanged: { isEditing in
                             self.showCancelButton = true
                         })
@@ -58,11 +56,11 @@ struct SearchListView: View {
                 .navigationBarHidden(showCancelButton)
                 .onChange(of: searchString) {newValue in
                     postSearchMsgToRepo()
+                    // search category picker
                 }
                 Picker("filterSetting", selection: $searchCategory) {
                     ForEach(SearchCategory.allCases, id: \.self) {
                         Text($0.rawValue).tag($0)
-                        
                     }
                 }
                 .pickerStyle(SegmentedPickerStyle())
@@ -70,12 +68,10 @@ struct SearchListView: View {
                     print(searchCategory.rawValue)
                     searchString = ""
                 }
-                
                 if !viewModel.searchedMoviesVm.isEmpty {
                     List {
                         ForEach(viewModel.searchedMoviesVm) {movie in
                             ZStack {
-                                
                                 Color.init(.sRGB, red: 0.6, green: 0.9, blue: 1.0, opacity: 0.5)
                                 NavigationLink(destination: DetailMovieView(movie: movie, showAddButton: true)) {
                                     HStack {
@@ -85,10 +81,8 @@ struct SearchListView: View {
                                         Spacer()
                                     }
                                 }
-                                
                                 .padding()
                                 .border(Color.black, width: 2)
-                                
                             }
                         }
                     }
@@ -110,10 +104,10 @@ struct SearchListView: View {
         // sender für api call in repository
         switch searchCategory {
         case .movieSearch:
-            NotificationCenter.default.post(name: .searchMovieQueryMsg, object: searchString)
+            NotificationCenter.default.post(name: .movieSearchQueryMessage, object: searchString)
             print("msg movie")
         case .tvShowSearch:
-            NotificationCenter.default.post(name: .searchTvShowQueryMsg, object: searchString)
+            NotificationCenter.default.post(name: .tvShowSearchQueryMessage, object: searchString)
             print("msg tv shows")
         }
     }

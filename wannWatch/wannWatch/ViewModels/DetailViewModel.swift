@@ -8,7 +8,7 @@
 import Foundation
 
 class DetailViewModel {
-
+    
     public func saveMovieToFavourites(movie: Watchable) {
         StorageLoader.shared.saveToFavouriteMovieList(movie: movie)
     }

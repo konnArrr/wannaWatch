@@ -14,6 +14,8 @@ struct InitialMovieDTO: Codable {
 }
 
 
+// typealias InitialMovieDTO = [MovieDTO]
+
 struct MovieDTO : Codable {
     let id: Int
     let title: String
@@ -25,12 +27,9 @@ struct MovieDTO : Codable {
     
     
     func mapToWatchable() -> Watchable {
-        // posterPath ?? ""
         return Watchable(id: self.id, title: self.title, originalLanguage: self.originalLanguage, overview: self.overview,voteAverage: self.voteAverage, releaseDate: self.releaseDate ,posterPath: self.posterPath)
     }
     
-//    enum CodingKeys: String, CodingKey {
-//        case id, title
-//        case originalLanguage = "original_language"
-//    }
+    
+    
 }

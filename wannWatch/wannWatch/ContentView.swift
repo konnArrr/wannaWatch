@@ -25,7 +25,7 @@ struct ContentView: View {
     }
     private func postSearchMsgToRepo() {
         print("button pressed")
-        NotificationCenter.default.post(name: .searchMovieQueryMsg, object: searchString)
+        NotificationCenter.default.post(name: .movieSearchQueryMessage, object: searchString)
     }
 }
 

@@ -9,7 +9,7 @@ import Foundation
 
 
 struct Watchable: Identifiable, Codable, Equatable {
-
+    
     
     let id: Int
     let title: String

@@ -26,12 +26,7 @@ struct TvShowDTO : Codable {
     
     
     func mapToWatchable() -> Watchable {
-        // posterPath ?? ""
         return Watchable(id: self.id, title: self.name, originalLanguage: self.originalLanguage, overview: self.overview,voteAverage: self.voteAverage, releaseDate: self.firstAirDate ,posterPath: self.posterPath)
     }
     
-//    enum CodingKeys: String, CodingKey {
-//        case id, title
-//        case originalLanguage = "original_language"
-//    }
 }

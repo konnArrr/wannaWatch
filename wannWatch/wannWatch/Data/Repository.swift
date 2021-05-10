@@ -10,33 +10,29 @@ import Combine
 
 
 
-
-
 extension Notification.Name {
-    static let searchMovieQueryMsg = Notification.Name("searchMovieQueryMsg")
-    static let searchTvShowQueryMsg = Notification.Name("searchTvShowQueryMsg")
+    static let movieSearchQueryMessage = Notification.Name("movieSearchQueryMessage")
+    static let tvShowSearchQueryMessage = Notification.Name("tvShowSearchQueryMessage")
 }
 
 
 
 class Repository {
-    
-    
     @Published var watchables = [Watchable]()
     let dataLoader = DataLoader()
     private let queryParamter = ["include_adult" : "true" ]
     private var cancellables: Set<AnyCancellable> = []
     init() {
-        // empfänger, sender in earch list view
-        NotificationCenter.Publisher(center: .default, name: .searchMovieQueryMsg)
+        // empfänger! sender is in earch list view...
+        NotificationCenter.Publisher(center: .default, name: .movieSearchQueryMessage)
             .sink { notification in
-                let object = notification.object // object ist vom Type Any ! da kann alles rein ...
+                let object = notification.object
                 guard let searchQuery = object as? String else { return }
                 self.searchForMoviesBy( searchQuery )
             }.store(in: &cancellables)
-        NotificationCenter.Publisher(center: .default, name: .searchTvShowQueryMsg)
+        NotificationCenter.Publisher(center: .default, name: .tvShowSearchQueryMessage)
             .sink { notification in
-                let object = notification.object // object ist vom Type Any ! da kann alles rein ...
+                let object = notification.object
                 guard let searchQuery = object as? String else { return }
                 self.searchForTvShowsBy( searchQuery )
             }.store(in: &cancellables)
@@ -50,7 +46,7 @@ class Repository {
         dataLoader.searchTvShow(query: query, searchParams: queryParamter)
         { [weak self] tvShows in
             self?.watchables = tvShows
-            // print("MOVIES: \(tvShows)")
+            // print("TvShows: \(tvShows)")
         }
     }
     

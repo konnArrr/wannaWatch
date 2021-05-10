@@ -23,10 +23,9 @@ struct FavouriteMoviesView: View {
                                         Spacer()
                                         Text(movie.title)
                                             .multilineTextAlignment(.center)
-                                         Spacer()
+                                        Spacer()
                                     }
-                                }
-                                
+                                }                                
                                 .padding()
                                 .border(Color.black, width: 2)
                             }
@@ -48,7 +47,7 @@ struct FavouriteMoviesView: View {
                 EditButton()
             }
         }
-
+        
     }
     private func delete(at offsets: IndexSet) {
         viewModel.deleteFromFavouriteList(at: offsets)
